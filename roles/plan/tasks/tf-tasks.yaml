@@ -12,19 +12,19 @@
   debug:
     msg: "{{ init.stdout }}"
   when: (operation == "init")
-- name: Create resources - Plan
+- name: Create resources - Apply
   shell: |
     cd {{ playbook_dir }}/tf;
     terraform workspace new {{ env }}
     terraform workspace select {{ env }}
-    terraform plan -var-file=env.tfvars -out=plan.tfplan;
-  when: (operation == "create-plan")
-  register: create_plan
-- name: "Display output: Create resources - Plan"
-  debug:
-    msg: "{{ create_plan.stdout }}"
-  when: (operation == "create-plan")
-- name: Create resources
+    #    terraform plan -var-file=env.tfvars -out=plan.tfplan;
+    # when: (operation == "create-plan")
+    # register: create_plan
+    #- name: "Display output: Create resources - Plan"
+    #debug:
+    # msg: "{{ create_plan.stdout }}"
+    #when: (operation == "create-plan")
+    #- name: Create resources
   shell: |
     cd {{ playbook_dir }}/tf;
     terraform workspace select {{ env }}
