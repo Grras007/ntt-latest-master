@@ -2,16 +2,16 @@
   template:
     src: templates/tfvars.j2
     dest: "{{ playbook_dir }}/tf/env.tfvars"
-- name: Init Terraform
-  shell: |
-    cd {{ playbook_dir }}/tf;
-    terraform init
-  when: (operation == "init")
-  register: init
-- name: "Display output: Init Terraform"
-  debug:
-    msg: "{{ init.stdout }}"
-  when: (operation == "init")
+#- name: Init Terraform
+#  shell: |
+##    cd {{ playbook_dir }}/tf;
+ #   terraform init
+ # when: (operation == "init")
+ # register: init
+#- name: "Display output: Init Terraform"
+#  debug:
+#    msg: "{{ init.stdout }}"
+#  when: (operation == "init")
 - name: Create resources - Apply
   shell: |
     cd {{ playbook_dir }}/tf;
@@ -25,9 +25,9 @@
     # msg: "{{ create_plan.stdout }}"
     #when: (operation == "create-plan")
     #- name: Create resources
-  shell: |
-    cd {{ playbook_dir }}/tf;
-    terraform workspace select {{ env }}
+#  shell: |
+ #   cd {{ playbook_dir }}/tf;
+ #   terraform workspace select {{ env }}
     terraform apply plan.tfplan
   when: (operation == "create")
   register: create
